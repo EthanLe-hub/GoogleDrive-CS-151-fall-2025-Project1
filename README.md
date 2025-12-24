@@ -36,3 +36,5 @@ Phuong implemented the GenericPDF, Slides class, and added to the Main class
 Lordin implemented the Spreadsheet and added cases to the Main class
 
 Brian implemented the DocPDF class, Exportable interface, and added to the Main class
+
+Link to Presentation Video: https://drive.google.com/file/d/1yBbKf1Rh8hgQ4UQtGXKWoYy1ZUlis6JE/view?usp=sharing
