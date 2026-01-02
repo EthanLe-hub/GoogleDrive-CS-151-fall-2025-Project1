@@ -83,7 +83,7 @@ public class Spreadsheet extends GenericPDF {
         if (this.getListOfRoles().get(acc.getEmail()).equals("OWNER") || this.getListOfRoles().get(acc.getEmail()).equals("EDITOR"))
         {
             String[][] newMatrix = new String[this.getRows() - 1][this.getCols()];
-            for (int row = 0; row < this.getRows(); row++) // Old content from OG sheet has the same indices.
+            for (int row = 0; row < this.getRows()-1; row++) // New content from OG sheet has the same indices, except the last row is removed. 
             {
                 for (int col = 0; col < this.getCols(); col++)
                 {
@@ -323,7 +323,7 @@ public class Spreadsheet extends GenericPDF {
         if (this.getListOfRoles().get(acc.getEmail()).equals("OWNER")) {
             System.out.println("\n--------------------------------------------------------------------------------");
             System.out.println("(1) Add a row/col to the sheet");
-            System.out.println("(2) Delete a row/col to the sheet");
+            System.out.println("(2) Delete a row/col from the sheet");
             System.out.println("(3) Add text to a cell");
             System.out.println("(4) Merge two Spreadsheets");
             System.out.println("(5) Split into two Spreadsheets");
@@ -338,7 +338,7 @@ public class Spreadsheet extends GenericPDF {
         } else if (this.getListOfRoles().get(acc.getEmail()).equals("EDITOR")) {
             System.out.println("\n--------------------------------------------------------------------------------");
             System.out.println("(1) Add a row/col to the sheet");
-            System.out.println("(2) Delete a row/col to the sheet");
+            System.out.println("(2) Delete a row/col from the sheet");
             System.out.println("(3) Add text to a cell");
             System.out.println("(6) Swap content between 2 cells");
             System.out.println("(7) View content of a cell");
