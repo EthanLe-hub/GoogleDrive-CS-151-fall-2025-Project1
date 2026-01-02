@@ -124,16 +124,23 @@ public class Main {
                                     }
                                     break;
                                 case "9":
-                                    System.out.print("Enter the page number you want to split at: ");
-                                    int index1 = scan.nextInt();
-                                    int splitNum = index1;
-                                    GenericPDF newSplit = ((DocPDF)PDF).split(splitNum, acc);
-                                    if (newSplit != null) {
-										acc.getDrive().getDocsFiles().put(string + " nextpart", (DocPDF)newSplit); // Add the new split document to the Drive with " part2" appended as part of the new file name.
-                                        System.out.println("Document successfully split. New deck created.");
-                                    } else {
-                                        System.out.println("Split index out of bounds. No split performed.");
-                                    }
+									if (acc.getDrive().getDocsFiles().size() < acc.getDrive().getMaxDocLimit()) // Check to ensure we have capacity for split. 
+									{
+										System.out.print("Enter the page number you want to split at: ");
+										int index1 = scan.nextInt();
+										int splitNum = index1;
+										GenericPDF newSplit = ((DocPDF)PDF).split(splitNum, acc);
+										if (newSplit != null) {
+											acc.getDrive().getDocsFiles().put(string + " nextpart", (DocPDF)newSplit); // Add the new split document to the Drive with " part2" appended as part of the new file name.
+											System.out.println("Document successfully split. New deck created.");
+										} else {
+											System.out.println("Split index out of bounds. No split performed.");
+										}
+									}
+                                    else // Print error message stating capacity is maxed out. 
+									{
+										System.out.println("Error! Max capacity reached for Documents! Delete existing Document files to split!");
+									}
                                     break;
                                 case "10":
 									System.out.println(); // Extra return for clearer readability. 
