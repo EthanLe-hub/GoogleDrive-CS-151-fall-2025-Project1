@@ -105,9 +105,9 @@ public class Spreadsheet extends GenericPDF {
         if (this.getListOfRoles().get(acc.getEmail()).equals("OWNER") || this.getListOfRoles().get(acc.getEmail()).equals("EDITOR"))
         {
             String[][] newMatrix = new String[this.getRows()][this.getCols() - 1];
-            for (int row = 0; row < this.getRows(); row++) // Old content from OG sheet has the same indices.
+            for (int row = 0; row < this.getRows(); row++) // New content from OG sheet has the same indices, except the last column is removed. 
             {
-                for (int col = 0; col < this.getCols(); col++)
+                for (int col = 0; col < this.getCols()-1; col++)
                 {
                     newMatrix[row][col] = this.matrix[row][col];
                 }
