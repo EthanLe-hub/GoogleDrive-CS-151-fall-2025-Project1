@@ -234,16 +234,23 @@ public class Main {
 									}
 									break;
 								case "5":
-									System.out.print("Enter the slide number you want to split at: ");
-									int splitIndex = scan.nextInt();
-									scan.nextLine();
-									int splitNum = splitIndex;
-									GenericPDF newSplit = ((Slides) PDF).split(splitNum, acc);
-									if (newSplit != null) {
-										acc.getDrive().getSlidesFiles().put(string + " nextpart", (Slides)newSplit); // Add the new split slide deck to the Drive with " part2" appended as part of the new file name.
-										System.out.println("Deck successfully split. New deck created.");
-									} else {
-										System.out.println("Split index out of bounds. No split performed.");
+									if (acc.getDrive().getSlidesFiles().size() < acc.getDrive().getMaxSlidesLimit()) // Check to ensure we have capacity for split. 
+									{
+										System.out.print("Enter the slide number you want to split at: ");
+										int splitIndex = scan.nextInt();
+										scan.nextLine();
+										int splitNum = splitIndex;
+										GenericPDF newSplit = ((Slides) PDF).split(splitNum, acc);
+										if (newSplit != null) {
+											acc.getDrive().getSlidesFiles().put(string + " nextpart", (Slides)newSplit); // Add the new split slide deck to the Drive with " part2" appended as part of the new file name.
+											System.out.println("Deck successfully split. New deck created.");
+										} else {
+											System.out.println("Split index out of bounds. No split performed.");
+										}
+									}
+									else // Print error message stating capacity is maxed out. 
+									{
+										System.out.println("Error! Max capacity reached for Slides! Delete existing Slide files to split!");
 									}
 									break;
 								case "6":
