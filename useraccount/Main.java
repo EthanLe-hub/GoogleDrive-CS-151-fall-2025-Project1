@@ -364,17 +364,24 @@ public class Main {
 									acc.getDrive().deletePDF("3", fileName); // Delete the other spreadsheet after merging it with the current spreadsheet.
 									break;
 								case "5":
-									System.out.println("Enter column to split: ");
-									int splitIndex = scan.nextInt();
-									scan.nextLine();
-									GenericPDF newSplit = ((Spreadsheet) PDF).split(splitIndex, acc); // convert to 0 index. 
-									if (newSplit != null) {
-										acc.getDrive().getSheetFiles().put(string + " nextpart", (Spreadsheet)newSplit); // Add the new split spreadsheet to the Drive with " part2" appended as part of the new file name.
-										System.out.println("Deck successfully split. New deck created.");
-									} else {
-										System.out.println("Split index out of bounds. No split performed.");
+									if (acc.getDrive().getSheetFiles().size() < acc.getDrive().getMaxSheetLimit()) // Check to ensure we have capacity for split. 
+									{
+										System.out.println("Enter column to split: ");
+										int splitIndex = scan.nextInt();
+										scan.nextLine();
+										GenericPDF newSplit = ((Spreadsheet) PDF).split(splitIndex, acc); // convert to 0 index. 
+										if (newSplit != null) {
+											acc.getDrive().getSheetFiles().put(string + " nextpart", (Spreadsheet)newSplit); // Add the new split spreadsheet to the Drive with " part2" appended as part of the new file name.
+											System.out.println("Deck successfully split. New deck created.");
+										} else {
+											System.out.println("Split index out of bounds. No split performed.");
+										}
 									}
-									break;
+									else // Print error message stating capacity is maxed out. 
+									{
+										System.out.println("Error! Max capacity reached for Spreadsheets! Delete existing Spreadsheet files to split!");
+									}
+									break; 
 								case "6":
 									System.out.println("Please choose which cell row and cell col to switch....");
 									System.out.print("First cell row: ");
